@@ -1,13 +1,17 @@
 package com.landlens.api.repository;
 
 import com.landlens.api.model.ApiRateLimit;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface ApiRateLimitRepository extends JpaRepository<ApiRateLimit, UUID> {
+public interface ApiRateLimitRepository {
+    Optional<ApiRateLimit> findById(UUID id);
+    List<ApiRateLimit> findAll();
+    ApiRateLimit save(ApiRateLimit apiRateLimit);
+    void delete(ApiRateLimit apiRateLimit);
+    void deleteById(UUID id);
+    long count();
+
     Optional<ApiRateLimit> findByApiKeyId(UUID apiKeyId);
 }

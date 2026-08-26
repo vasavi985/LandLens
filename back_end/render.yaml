@@ -9,13 +9,14 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: DB_URL
-        sync: false # User to supply their database url in Render dashboard
-      - key: DB_USERNAME
+      - key: FIREBASE_PROJECT_ID
         sync: false
-      - key: DB_PASSWORD
+      - key: FIREBASE_API_KEY
+        sync: false
+      - key: FIREBASE_CREDENTIALS_JSON
         sync: false
       - key: JWT_SECRET
         sync: false
       - key: PORT
         value: 8080
+

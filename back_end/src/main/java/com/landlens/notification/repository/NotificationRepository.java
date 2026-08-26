@@ -1,13 +1,17 @@
 package com.landlens.notification.repository;
 
 import com.landlens.notification.model.Notification;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface NotificationRepository extends JpaRepository<Notification, UUID> {
+public interface NotificationRepository {
+    Optional<Notification> findById(UUID id);
+    List<Notification> findAll();
+    Notification save(Notification notification);
+    void delete(Notification notification);
+    void deleteById(UUID id);
+    long count();
+
     List<Notification> findByReceiverIdAndIsActiveTrueOrderByCreatedTimeDesc(UUID receiverId);
 }

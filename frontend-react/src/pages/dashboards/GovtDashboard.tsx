@@ -1624,7 +1624,7 @@ export const GovtDashboard = () => {
             {[
               { name: 'PostgreSQL Database', status: 'Healthy', latency: '4ms' },
               { name: 'AI OCR Document Processor', status: 'Healthy', latency: '42ms' },
-              { name: 'Mapbox Geospatial Tile Engine', status: 'Healthy', latency: '12ms' },
+              { name: 'OpenStreetMap Geospatial Tile Engine', status: 'Healthy', latency: '12ms' },
               { name: 'Fraud Anomaly Detection Queue', status: 'Healthy', latency: '18ms' },
               { name: 'Developer REST API Gateway', status: 'Healthy', latency: '8ms' },
               { name: 'Notification Websocket Service', status: 'Healthy', latency: '2ms' },

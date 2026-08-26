@@ -1,13 +1,17 @@
 package com.landlens.property.repository;
 
 import com.landlens.property.model.PropertyImage;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface PropertyImageRepository extends JpaRepository<PropertyImage, UUID> {
+public interface PropertyImageRepository {
+    Optional<PropertyImage> findById(UUID id);
+    List<PropertyImage> findAll();
+    PropertyImage save(PropertyImage propertyImage);
+    void delete(PropertyImage propertyImage);
+    void deleteById(UUID id);
+    long count();
+
     List<PropertyImage> findByPropertyIdAndIsActiveTrueOrderByDisplayOrderAsc(UUID propertyId);
 }

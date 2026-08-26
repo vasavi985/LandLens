@@ -1,13 +1,17 @@
 package com.landlens.ai.repository;
 
 import com.landlens.ai.model.AiMessage;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface AiMessageRepository extends JpaRepository<AiMessage, UUID> {
+public interface AiMessageRepository {
+    Optional<AiMessage> findById(UUID id);
+    List<AiMessage> findAll();
+    AiMessage save(AiMessage aiMessage);
+    void delete(AiMessage aiMessage);
+    void deleteById(UUID id);
+    long count();
+
     List<AiMessage> findByConversationIdAndIsActiveTrueOrderByTimestampAsc(UUID conversationId);
 }

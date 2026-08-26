@@ -1,13 +1,17 @@
 package com.landlens.verification.repository;
 
 import com.landlens.verification.model.VerificationTimeline;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface VerificationTimelineRepository extends JpaRepository<VerificationTimeline, UUID> {
+public interface VerificationTimelineRepository {
+    Optional<VerificationTimeline> findById(UUID id);
+    List<VerificationTimeline> findAll();
+    VerificationTimeline save(VerificationTimeline verificationTimeline);
+    void delete(VerificationTimeline verificationTimeline);
+    void deleteById(UUID id);
+    long count();
+
     List<VerificationTimeline> findByPropertyIdAndIsActiveTrueOrderByTimestampAsc(UUID propertyId);
 }

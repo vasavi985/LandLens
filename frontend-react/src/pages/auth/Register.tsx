@@ -28,7 +28,20 @@ export const Register = () => {
       setSuccessMsg('Account registered successfully! Redirecting to login page...');
       setTimeout(() => navigate('/auth/login'), 2000);
     } catch (err: any) {
-      setErrorMsg(err.response?.data?.message || 'Failed to register account. Email might be in use.');
+      let msg = 'Failed to register account. Email might be in use.';
+      if (err.response?.data) {
+        if (typeof err.response.data === 'string') {
+          try {
+            const parsed = JSON.parse(err.response.data);
+            msg = parsed.message || msg;
+          } catch (e) {
+            msg = err.response.data || msg;
+          }
+        } else {
+          msg = err.response.data.message || msg;
+        }
+      }
+      setErrorMsg(msg);
     } finally {
       setLoading(false);
     }

@@ -7,12 +7,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 backend-info/credentials.txt
+# Dependency and Build folders
+node_modules/
+dist/
+dist-ssr/
+
+# Environment files
 .env
-node_modules
-dist
-dist-ssr
+.env.*
+!.env.example
 *.local
-.env
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

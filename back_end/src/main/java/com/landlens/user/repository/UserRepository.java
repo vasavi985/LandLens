@@ -1,15 +1,19 @@
 package com.landlens.user.repository;
 
 import com.landlens.user.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository {
+    Optional<User> findById(UUID id);
+    List<User> findAll();
+    User save(User user);
+    void delete(User user);
+    void deleteById(UUID id);
+    long count();
+
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
-    java.util.List<User> findByRoleName(String roleName);
+    List<User> findByRoleName(String roleName);
 }

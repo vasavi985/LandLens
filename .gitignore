@@ -37,3 +37,22 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Credentials & Service Accounts
+firebase-service-account.json
+**/firebase-service-account.json
+local-env.ps1
+**/local-env.ps1
+
+# Local configuration
+application-local.properties
+**/application-local.properties
+
+# Firebase local files
+.firebase/
+**/.firebase/
+
+# Environment files
+.env.*
+!.env.example
+

@@ -1,13 +1,17 @@
 package com.landlens.ai.repository;
 
 import com.landlens.ai.model.AiVerification;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface AiVerificationRepository extends JpaRepository<AiVerification, UUID> {
+public interface AiVerificationRepository {
+    Optional<AiVerification> findById(UUID id);
+    List<AiVerification> findAll();
+    AiVerification save(AiVerification aiVerification);
+    void delete(AiVerification aiVerification);
+    void deleteById(UUID id);
+    long count();
+
     Optional<AiVerification> findByPropertyIdAndIsActiveTrue(UUID propertyId);
 }

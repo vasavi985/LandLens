@@ -2,14 +2,18 @@ package com.landlens.auth.repository;
 
 import com.landlens.auth.model.RefreshToken;
 import com.landlens.user.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
-@Repository
-public interface RefreshTokenRepository extends JpaRepository<RefreshToken, UUID> {
+public interface RefreshTokenRepository {
+    Optional<RefreshToken> findById(UUID id);
+    List<RefreshToken> findAll();
+    RefreshToken save(RefreshToken refreshToken);
+    void delete(RefreshToken refreshToken);
+    void deleteById(UUID id);
+    long count();
+
     Optional<RefreshToken> findByToken(String token);
     void deleteByUser(User user);
 }

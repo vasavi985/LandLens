@@ -1,13 +1,17 @@
 package com.landlens.document.repository;
 
 import com.landlens.document.model.PropertyDocument;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-@Repository
-public interface PropertyDocumentRepository extends JpaRepository<PropertyDocument, UUID> {
+public interface PropertyDocumentRepository {
+    Optional<PropertyDocument> findById(UUID id);
+    List<PropertyDocument> findAll();
+    PropertyDocument save(PropertyDocument propertyDocument);
+    void delete(PropertyDocument propertyDocument);
+    void deleteById(UUID id);
+    long count();
+
     List<PropertyDocument> findByPropertyIdAndIsActiveTrue(UUID propertyId);
 }
