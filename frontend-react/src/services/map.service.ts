@@ -18,9 +18,7 @@ export const mapService = {
   geocode: async (address: string): Promise<[number, number] | null> => {
     try {
       const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`;
-      const response = await axios.get(url, {
-        headers: { 'User-Agent': 'LandLens/1.0' }
-      });
+      const response = await axios.get(url);
       const data = response.data;
       if (data && data.length > 0) {
         // Return [lng, lat] for Mapbox compatibility
@@ -38,8 +36,7 @@ export const mapService = {
       const url = `https://nominatim.openstreetmap.org/reverse?format=json&lon=${lng}&lat=${lat}&addressdetails=1`;
       const response = await axios.get(url, {
         headers: { 
-          'Accept-Language': 'en',
-          'User-Agent': 'LandLens/1.0'
+          'Accept-Language': 'en'
         }
       });
       const data = response.data;
