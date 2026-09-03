@@ -44,9 +44,9 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "x-api-key"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Authorization"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -61,6 +61,7 @@ public class WebSecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                  .requestMatchers(
+        "/",
         "/api/auth/**",
         "/api/v1/external/**",
         "/error",
@@ -70,7 +71,7 @@ public class WebSecurityConfig {
         "/v3/api-docs",
         "/swagger-resources/**",
         "/webjars/**",
-        "/actuator/health"
+        "/actuator/**"
 ).permitAll()
                  .requestMatchers(org.springframework.http.HttpMethod.GET,
         "/api/properties",
