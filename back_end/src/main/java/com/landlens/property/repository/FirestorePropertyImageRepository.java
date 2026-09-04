@@ -24,10 +24,15 @@ public class FirestorePropertyImageRepository extends AbstractFirestoreRepositor
             QuerySnapshot snapshot = getCollection()
                     .whereEqualTo("property.id", propertyId.toString())
                     .whereEqualTo("isActive", true)
-                    .orderBy("displayOrder", Query.Direction.ASCENDING)
                     .get().get();
             return snapshot.getDocuments().stream()
                     .map(doc -> mapToObject(doc.getData()))
+                    .filter(java.util.Objects::nonNull)
+                    .sorted((img1, img2) -> {
+                        Integer o1 = img1.getDisplayOrder() != null ? img1.getDisplayOrder() : Integer.MAX_VALUE;
+                        Integer o2 = img2.getDisplayOrder() != null ? img2.getDisplayOrder() : Integer.MAX_VALUE;
+                        return o1.compareTo(o2);
+                    })
                     .collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException("Error searching property images: " + propertyId, e);

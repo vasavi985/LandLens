@@ -24,10 +24,16 @@ public class FirestoreVerificationTimelineRepository extends AbstractFirestoreRe
             QuerySnapshot snapshot = getCollection()
                     .whereEqualTo("property.id", propertyId.toString())
                     .whereEqualTo("isActive", true)
-                    .orderBy("timestamp", Query.Direction.ASCENDING)
                     .get().get();
             return snapshot.getDocuments().stream()
                     .map(doc -> mapToObject(doc.getData()))
+                    .filter(java.util.Objects::nonNull)
+                    .sorted((t1, t2) -> {
+                        if (t1.getTimestamp() == null && t2.getTimestamp() == null) return 0;
+                        if (t1.getTimestamp() == null) return 1;
+                        if (t2.getTimestamp() == null) return -1;
+                        return t1.getTimestamp().compareTo(t2.getTimestamp());
+                    })
                     .collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException("Error listing verification timeline for property: " + propertyId, e);

@@ -1,9 +1,12 @@
 package com.landlens.property.controller;
 
+import com.landlens.common.exception.ResourceNotFoundException;
 import com.landlens.property.dto.*;
 import com.landlens.property.mapper.PropertyMapper;
 import com.landlens.property.model.*;
 import com.landlens.property.service.PropertyService;
+import com.landlens.user.model.User;
+import com.landlens.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +29,24 @@ public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    private UUID resolveUserId(Principal principal) {
+        try {
+            return UUID.fromString(principal.getName());
+        } catch (IllegalArgumentException e) {
+            return userRepository.findByEmail(principal.getName())
+                    .map(User::getId)
+                    .orElseThrow(() -> new ResourceNotFoundException("User record not found for principal: " + principal.getName()));
+        }
+    }
+
     @PostMapping
-    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN', 'SELLER')")
     public ResponseEntity<PropertyResponseDto> createProperty(
             @Valid @RequestBody PropertyRequestDto propertyDto, Principal principal) {
-        UUID providerId = UUID.fromString(principal.getName());
+        UUID providerId = resolveUserId(principal);
         Property property = PropertyMapper.toEntity(propertyDto);
         Property created = propertyService.createProperty(property, providerId);
         return ResponseEntity.ok(PropertyMapper.toResponseDto(created));
@@ -60,24 +76,25 @@ public class PropertyController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN', 'SELLER')")
     public ResponseEntity<PropertyResponseDto> updateProperty(
             @PathVariable UUID id,
             @Valid @RequestBody PropertyRequestDto detailsDto,
             Principal principal) {
-        UUID providerId = UUID.fromString(principal.getName());
+        UUID providerId = resolveUserId(principal);
         Property details = PropertyMapper.toEntity(detailsDto);
         Property updated = propertyService.updateProperty(id, details, providerId);
         return ResponseEntity.ok(PropertyMapper.toResponseDto(updated));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN', 'GOVT', 'GOVERNMENT')")
+    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN', 'GOVERNMENT_OFFICER', 'GOVT', 'GOVERNMENT', 'SELLER')")
     public ResponseEntity<Object> deleteProperty(@PathVariable UUID id, Principal principal) {
-        UUID userId = UUID.fromString(principal.getName());
+        UUID userId = resolveUserId(principal);
         boolean isAdminOrGovt = org.springframework.security.core.context.SecurityContextHolder.getContext()
                 .getAuthentication().getAuthorities().stream()
                 .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN") || 
+                                  auth.getAuthority().equals("ROLE_GOVERNMENT_OFFICER") ||
                                   auth.getAuthority().equals("ROLE_GOVT") || 
                                   auth.getAuthority().equals("ROLE_GOVERNMENT"));
         propertyService.deleteProperty(id, userId, isAdminOrGovt);
@@ -85,7 +102,7 @@ public class PropertyController {
     }
 
     @PostMapping("/{id}/images")
-    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN', 'SELLER')")
     public ResponseEntity<PropertyImageDto> addImage(
             @PathVariable UUID id,
             @RequestBody PropertyImageDto imageDto) {
@@ -108,7 +125,7 @@ public class PropertyController {
     }
 
     @PostMapping("/{id}/videos")
-    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN')")
+    @PreAuthorize("hasAnyRole('PROVIDER', 'ADMIN', 'SELLER')")
     public ResponseEntity<PropertyVideoDto> addVideo(
             @PathVariable UUID id,
             @RequestBody PropertyVideoDto videoDto) {
@@ -133,7 +150,7 @@ public class PropertyController {
     @PostMapping("/{id}/save")
     @PreAuthorize("hasAnyRole('BUYER', 'ADMIN')")
     public ResponseEntity<SavedPropertyResponseDto> saveProperty(@PathVariable UUID id, Principal principal) {
-        UUID buyerId = UUID.fromString(principal.getName());
+        UUID buyerId = resolveUserId(principal);
         SavedProperty saved = propertyService.saveProperty(id, buyerId);
         return ResponseEntity.ok(PropertyMapper.toResponseDto(saved));
     }
@@ -141,7 +158,7 @@ public class PropertyController {
     @DeleteMapping("/{id}/save")
     @PreAuthorize("hasAnyRole('BUYER', 'ADMIN')")
     public ResponseEntity<Object> unsaveProperty(@PathVariable UUID id, Principal principal) {
-        UUID buyerId = UUID.fromString(principal.getName());
+        UUID buyerId = resolveUserId(principal);
         propertyService.unsaveProperty(id, buyerId);
         return ResponseEntity.ok("Property removed from saved items");
     }
@@ -149,7 +166,7 @@ public class PropertyController {
     @GetMapping("/saved")
     @PreAuthorize("hasAnyRole('BUYER', 'ADMIN')")
     public ResponseEntity<List<SavedPropertyResponseDto>> getSavedProperties(Principal principal) {
-        UUID buyerId = UUID.fromString(principal.getName());
+        UUID buyerId = resolveUserId(principal);
         List<SavedProperty> saved = propertyService.getSavedProperties(buyerId);
         List<SavedPropertyResponseDto> dtoList = saved.stream()
                 .map(PropertyMapper::toResponseDto)
@@ -163,7 +180,7 @@ public class PropertyController {
             @PathVariable UUID id,
             @Valid @RequestBody PropertyVisitRequestDto visitDto,
             Principal principal) {
-        UUID buyerId = UUID.fromString(principal.getName());
+        UUID buyerId = resolveUserId(principal);
         PropertyVisit visit = new PropertyVisit();
         visit.setVisitDate(visitDto.getVisitDate());
         visit.setVisitTime(visitDto.getVisitTime());
@@ -174,11 +191,11 @@ public class PropertyController {
 
     @GetMapping("/visits")
     public ResponseEntity<List<PropertyVisitResponseDto>> getVisits(Principal principal, HttpServletRequest request) {
-        UUID userId = UUID.fromString(principal.getName());
+        UUID userId = resolveUserId(principal);
         
         boolean isProvider = org.springframework.security.core.context.SecurityContextHolder.getContext()
                 .getAuthentication().getAuthorities().stream()
-                .anyMatch(auth -> auth.getAuthority().equals("ROLE_PROVIDER"));
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_PROVIDER") || auth.getAuthority().equals("ROLE_SELLER"));
 
         List<PropertyVisit> list;
         if (isProvider) {
@@ -198,13 +215,13 @@ public class PropertyController {
             @PathVariable UUID visitId,
             @RequestParam String status,
             Principal principal) {
-        UUID userId = UUID.fromString(principal.getName());
+        UUID userId = resolveUserId(principal);
         PropertyVisit updated = propertyService.updateVisitStatus(visitId, status, userId);
         return ResponseEntity.ok(PropertyMapper.toResponseDto(updated));
     }
 
     @PostMapping("/deconflict-coordinates")
-    @PreAuthorize("hasAnyRole('ADMIN', 'GOVT', 'GOVERNMENT')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GOVERNMENT_OFFICER', 'GOVT', 'GOVERNMENT')")
     public ResponseEntity<String> deconflictPropertyCoordinates() {
         int updatedCount = propertyService.deconflictPlottedProperties();
         return ResponseEntity.ok("Deconfliction process complete. Adjusted coordinates for " + updatedCount + " overlapping properties.");

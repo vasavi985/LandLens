@@ -261,21 +261,33 @@ export const ProviderDashboard = () => {
         finishSave();
       } else {
         if (!selectedAddPropertyDocFile) {
-          alert('Please choose a land document to upload.');
+          alert('Please choose a land document (e.g., Patta, Sale Deed) to upload before submitting.');
           setIsSaving(false);
           return;
         }
+
+        // 1. Upload land document to Cloudinary first
         const uploadRes = await cloudinaryService.uploadFile(selectedAddPropertyDocFile);
+        const docUrl = uploadRes.secure_url;
+
+        // 2. Include the uploaded document URL in the property payload
+        payload.documentUrl = docUrl;
+
+        // 3. POST /api/properties runs only after the document upload succeeds
         const createdProperty = await propertyService.createProperty(payload as any);
+
+        // 4. Register the document record linked to the created property
         await propertyService.uploadDocument(createdProperty.id, {
-          documentType: 'PATTA',
-          fileUrl: uploadRes.secure_url
+          documentType: selectedDocType || 'PATTA',
+          fileUrl: docUrl
         } as any);
+
         finishSave(createdProperty?.propertyCode);
       }
     } catch (err: any) {
       console.error('Error saving property:', err);
-      alert('Error saving property: ' + (err.response?.data?.message || err.message));
+      const errorMessage = err.message || err.response?.data?.message || 'An unexpected error occurred.';
+      alert('Error saving property: ' + errorMessage);
       setIsSaving(false);
     }
   };

@@ -59,10 +59,16 @@ public class FirestorePropertyRepository extends AbstractFirestoreRepository<Pro
         try {
             QuerySnapshot snapshot = getCollection()
                     .whereEqualTo("isActive", true)
-                    .orderBy("createdAt", Query.Direction.ASCENDING)
                     .get().get();
             return snapshot.getDocuments().stream()
                     .map(doc -> mapToObject(doc.getData()))
+                    .filter(java.util.Objects::nonNull)
+                    .sorted((p1, p2) -> {
+                        if (p1.getCreatedAt() == null && p2.getCreatedAt() == null) return 0;
+                        if (p1.getCreatedAt() == null) return 1;
+                        if (p2.getCreatedAt() == null) return -1;
+                        return p1.getCreatedAt().compareTo(p2.getCreatedAt());
+                    })
                     .collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException("Error listing active properties ordered by createdAt", e);

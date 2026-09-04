@@ -44,6 +44,7 @@ api.interceptors.response.use(
           const res = await authService.refreshAccessToken();
           const newToken = res.accessToken || res.token || localStorage.getItem('access_token');
           processQueue(null, newToken);
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return api(originalRequest);
         } catch (err) {
           processQueue(err, null);

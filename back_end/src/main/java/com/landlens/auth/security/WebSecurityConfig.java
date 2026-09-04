@@ -59,6 +59,18 @@ public class WebSecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setContentType("application/json");
+                    response.setStatus(jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("{\"timestamp\":\"" + java.time.Instant.now() + "\",\"status\":401,\"error\":\"Unauthorized\",\"message\":\"Authentication required: " + (authException.getMessage() != null ? authException.getMessage().replace("\"", "'") : "User not authenticated") + "\",\"path\":\"" + request.getRequestURI() + "\"}");
+                })
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    response.setContentType("application/json");
+                    response.setStatus(jakarta.servlet.http.HttpServletResponse.SC_FORBIDDEN);
+                    response.getWriter().write("{\"timestamp\":\"" + java.time.Instant.now() + "\",\"status\":403,\"error\":\"Forbidden\",\"message\":\"Access Denied: " + (accessDeniedException.getMessage() != null ? accessDeniedException.getMessage().replace("\"", "'") : "Insufficient permissions") + "\",\"path\":\"" + request.getRequestURI() + "\"}");
+                })
+            )
             .authorizeHttpRequests(auth -> auth
                  .requestMatchers(
         "/",
