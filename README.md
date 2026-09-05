@@ -751,5 +751,4 @@ Boots the Spring Boot application cleanly inside an isolated multi-stage Docker 
 1.  Create a feature branch from `main` (`git checkout -b feature/amazing-feature`).
 2.  Commit your changes using meaningful, structured commit messages.
 3.  Submit a Pull Request targeting the `main` branch.
-
-*Architected & Lead Developed with ❤️ by **Pavan Kumar Swamy** and **Team Pixel Pirates** (Santhi Priya, Hemanth Kotipalli, Keerthi Thammisetty, Rama Sai, and Rama Vasavi).*
+ 
