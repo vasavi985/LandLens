@@ -5,20 +5,21 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6.svg)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://www.docker.com/)
-[![AWS](https://img.shields.io/badge/AWS-ECS%20%7C%20CloudFront-FF9900.svg)](https://aws.amazon.com/)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1.svg)](https://www.mysql.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-Hosting%20%7C%20Firestore-FFCA28.svg?logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Render](https://img.shields.io/badge/Render-Backend%20Deployed-46E3B7.svg?logo=render&logoColor=black)](https://render.com/)
+[![Cloudinary](https://img.shields.io/badge/Cloudinary-Media%20Storage-3448C5.svg?logo=cloudinary&logoColor=white)](https://cloudinary.com/)
 
 <p align="center">
   <img src="./frontend-react/public/logo.png" alt="LandLens Logo" width="280"/>
 </p>
 
 <p align="center">
-  <a href="https://dpyyh7torlown.cloudfront.net">
-    <img src="https://img.shields.io/badge/Live_Production-https%3A%2F%2Fdpyyh7torlown.cloudfront.net-brightgreen?style=for-the-badge&logo=amazonaws" alt="Live Production URL"/>
+  <a href="https://landlens-c0007.web.app">
+    <img src="https://img.shields.io/badge/Live_Production-https%3A%2F%2Flandlens--c0007.web.app-brightgreen?style=for-the-badge&logo=firebase" alt="Live Production URL"/>
   </a>
 </p>
 
-### 🌐 **Live Production Web Portal:** [https://dpyyh7torlown.cloudfront.net](https://dpyyh7torlown.cloudfront.net)
+### 🌐 **Live Production Web Portal:** [https://landlens-c0007.web.app](https://landlens-c0007.web.app)
 
 ---
 
@@ -39,7 +40,7 @@
 14. [Environment Variables Reference](#14-environment-variables-reference)
 15. [Security, Auth & Rate Limiting](#15-security-auth--rate-limiting)
 16. [Application Scalability & Performance](#16-application-scalability--performance)
-17. [AWS Infrastructure Cost Projections](#17-aws-infrastructure-cost-projections)
+17. [Cloud Infrastructure Cost Projections](#17-cloud-infrastructure-cost-projections)
 18. [Future Roadmap & Improvements](#18-future-roadmap--improvements)
 19. [Contributing & License](#19-contributing--license)
 
@@ -109,7 +110,7 @@ Below is an interactive visual walkthrough of the live **LandLens** platform str
 | <img src="https://github.com/vasavi985.png" width="65" style="border-radius: 15px;"/> | [@vasavi985](https://github.com/vasavi985) | **Rama Vasavi Patchikolla** | **Lead Backend Engineer**<br>Flawlessly developed all Spring Boot 3.4 REST APIs, JWT authentication, RBAC filters, database JPA services, and co-executed full-stack deployments and DevOps pipelines. |
 | <img src="https://github.com/hemanthkotipalli.png" width="65" style="border-radius: 15px;"/> | [@hemanthkotipalli](https://github.com/hemanthkotipalli) | **Hemanth Kotipalli** | **AI & GenAI Systems Engineer**<br>Built the interactive AI Chatbot assistant, OCR document extraction pipeline, GenAI verification algorithms, and automated land trust score calculations. |
 | <img src="https://github.com/keerthithammisetty.png" width="65" style="border-radius: 15px;"/> | [@keerthithammisetty](https://github.com/keerthithammisetty) | **Keerthi Thammisetty** | **Database Architect & Schema Designer**<br>Engineered and normalized the 3NF relational database schema (`schema.sql`), optimized JPA query relationships, entity mappings, and database transaction boundaries. |
-| <img src="https://github.com/ramasai98.png" width="65" style="border-radius: 15px;"/> | [@ramasai98](https://github.com/ramasai98) | **Rama Sai** | **DevOps & Cloud Infrastructure Architect**<br>Architected the AWS Cloud topology—configuring CloudFront CDN edge distribution, S3 static hosting, ECS Fargate container clusters, ALB load balancers, and Terraform IaC scripts. |
+| <img src="https://github.com/ramasai98.png" width="65" style="border-radius: 15px;"/> | [@ramasai98](https://github.com/ramasai98) | **Rama Sai** | **DevOps & Cloud Infrastructure Architect**<br>Architected the cloud topology, configuring CDN edge distribution, static hosting, container clusters, load balancers, and deployment automation scripts. |
 
 ---
 
@@ -118,24 +119,24 @@ Below is an interactive visual walkthrough of the live **LandLens** platform str
 In an intensive **1-week engineering sprint**, the team achieved major milestones and resolved complex technical challenges:
 
 1.  **Frontend Modernization**: Completely ported legacy Angular code to a high-performance **React 18 + Vite** stack, boosting bundle build speed by **8x** and runtime responsiveness.
-2.  **HTTPS & Mixed Content Resolution**: Solved browser Mixed Content blocks (`https://...` calling insecure `http://...` ALB endpoints) by routing all API traffic through CloudFront edge origin request policies.
+2.  **HTTPS & API Communication**: Solved browser Mixed Content and CORS challenges by establishing secure, encrypted HTTPS routing between the frontend and the cloud backend API.
 3.  **Code Quality & SonarQube Automation**: Built custom Python automation (`automate_sonar.py`) to run static analysis, eliminating code smells, memory leaks, and unhandled exceptions.
-4.  **AWS Security Hardening**: Secured exposed API keys and automated secret rotation using AWS KMS and Secrets Manager.
+4.  **Security & Credential Hardening**: Secured API keys, JWT secret management, and role-based access verification across environments.
 5.  **Multi-Role Dashboards**: Built 4 distinct role-tailored portals (Buyer, Land Provider, Government Officer, Admin) in record time.
 
 ---
 
-## 5. Complete Technology Stack by Service
+## 6. Complete Technology Stack by Service
 
-| 🎨 Frontend Tier (`/frontend-react`) | ⚙️ Backend & DB Tier (`/back_end`) | ☁️ Cloud & DevOps Tier (AWS / Ops) |
+| 🎨 Frontend Tier (`/frontend-react`) | ⚙️ Backend & DB Tier (`/back_end`) | ☁️ Cloud & DevOps Tier (Production) |
 | :--- | :--- | :--- |
-| **React 18** — Component Architecture | **Spring Boot 3.4.0** — Java 21 Framework | **AWS CloudFront** — Global Edge CDN |
-| **Vite 5** — Fast HMR Bundler & Compiler | **Spring Security** — JWT Token Auth | **AWS S3** — Static Asset & Media Bucket |
-| **TypeScript 5.0** — Type-Safe Application | **Spring Data JPA** — Hibernate ORM | **AWS ECS Fargate** — Serverless Containers |
-| **Tailwind CSS** — Glassmorphism Design | **HikariCP** — Database Connection Pool | **AWS ALB** — Application Load Balancer |
-| **Mapbox GL JS** — GIS Interactive Mapping | **MySQL 8.0** — 3NF Relational Database | **AWS NAT Gateway** — Static Egress IP |
-| **Pannellum VR** — 360° Panorama Viewer | **BCrypt** — Secure Password Hashing | **Jenkins & GitHub Actions** — CI/CD Pipelines |
-| **Axios** — Auth Bearer Interceptors | **Jackson & OpenAPI** — JSON & Swagger | **SonarQube** — Static Code Analysis |
+| **React 18** — Component Architecture | **Spring Boot 3.4.0** — Java 21 Framework | **Firebase Hosting** — Global SSL CDN Edge Hosting |
+| **Vite 5** — Fast HMR Bundler & Compiler | **Spring Security** — Dual JWT & Firebase Auth Filter | **Render** — Managed Containerized Backend Runtime |
+| **TypeScript 5.0** — Type-Safe Application | **Google Cloud Firestore** — NoSQL Document Database | **Google Cloud Platform** — Identity & Firestore Services |
+| **Tailwind CSS** — Glassmorphism Design | **Firebase Admin SDK** — User Token Verification | **Cloudinary** — Media Storage & CDN Delivery |
+| **Mapbox GL JS** — GIS Interactive Mapping | **Cloudinary Java/REST** — Media Integration | **Docker** — Multi-Stage Production Containerization |
+| **Pannellum VR** — 360° Panorama Viewer | **BCrypt** — Secure Password Hashing | **GitHub Actions** — CI/CD Automation & Build Verification |
+| **Axios** — Auth Bearer Interceptors | **Jackson & OpenAPI** — JSON & Swagger | **SonarQube** — Static Code Analysis & Security Auditing |
 
 ### 🔄 Architectural Tier Interactions
 ```mermaid
@@ -146,86 +147,85 @@ graph TD
         VR[Pannellum 360 VR Player]
     end
 
-    subgraph CDNEast [AWS CDN & Edge Distribution]
-        CF[Amazon CloudFront CDN]
-        S3[AWS S3 Bucket]
+    subgraph HostingLayer [Global Edge CDN & Frontend Hosting]
+        FH[Firebase Hosting Global CDN]
     end
 
-    subgraph ServerLayer [Application Server Layer]
-        ALB[AWS Application Load Balancer]
-        ECS[AWS ECS Fargate - Spring Boot Container]
-        SEC[Spring Security & JWT Filter]
+    subgraph ServerLayer [Application Server Layer - Render]
+        API[Spring Boot 3.4 REST API Container]
+        SEC[Spring Security & Firebase Token Filter]
     end
 
-    subgraph PersistenceLayer [Data & Persistence Layer]
-        NAT[AWS NAT Gateway Egress]
-        DB[(Hostinger MySQL 8.0 Database)]
+    subgraph CloudPersistence [Cloud Services & Persistence Layer]
+        FS[(Google Cloud Firestore NoSQL Database)]
+        FA[Firebase Authentication & Identity]
+        CD[Cloudinary Media & Document Storage]
         AI[AI Trust & OCR Engine]
     end
 
-    FE -->|1. Request Static Bundle| CF
-    CF -->|2. Fetch Assets| S3
-    FE -->|3. HTTPS API Calls| CF
-    CF -->|4. Proxy /api/*| ALB
-    ALB -->|5. Forward Port 8080| ECS
-    ECS -->|6. Intercept & Validate Token| SEC
-    ECS -->|7. Outbound Egress| NAT
-    NAT -->|8. JDBC SQL Queries| DB
-    ECS -->|9. Async Analysis| AI
+    FE -->|1. Request Static Bundle| FH
+    FH -->|2. Deliver Optimized SPA Assets| FE
+    FE -->|3. HTTPS REST API Calls| API
+    API -->|4. Intercept & Validate Token| SEC
+    SEC -->|5. Verify Firebase ID Token| FA
+    API -->|6. Firestore Read/Write Operations| FS
+    FE -->|7. Upload Images / Documents / 360 VR| CD
+    API -->|8. Store Media URLs & Document References| FS
+    API -->|9. Trigger Document OCR & Trust Analysis| AI
 ```
 
 ---
 
-## 6. Platform & Cloud Infrastructure Services
+## 7. Platform & Cloud Infrastructure Services
 
 | Domain | Service / Platform | Usage & Responsibility |
 | :--- | :--- | :--- |
-| **Edge CDN** | **Amazon CloudFront** | Global SSL termination, HTTPS caching, `/api/*` request proxying. |
-| **Object Storage** | **Amazon S3** | Hosting compiled static React frontend assets and user land documents. |
-| **Compute Containers**| **AWS ECS Fargate** | Serverless Docker container execution running Spring Boot tasks. |
-| **Load Balancing** | **AWS Application Load Balancer (ALB)** | Routing HTTP 8080 traffic to active container target groups with health checks. |
-| **Network Egress** | **AWS NAT Gateway** | Providing static Egress IP (`13.207.227.126`) for remote MySQL database access. |
-| **Container Registry**| **Amazon ECR** | Storing immutable Docker container image tags. |
-| **Database Server** | **Hostinger / AWS RDS MySQL 8.0** | 3NF relational data store with spatial coordinates and audit trails. |
-| **CI/CD Automation** | **GitHub Actions & Jenkins** | Automated build verification, unit testing, S3 sync, and ECS deployment. |
-| **Code Quality** | **SonarQube & Python Runner** | Static code analysis, vulnerability scanning, and code smell remediation. |
-| **Reverse Proxy** | **Nginx** | Optional local gateway routing and SSL termination in staging environments. |
+| **Frontend Web Hosting** | **Firebase Hosting** | Global SSL termination, HTTP/2 CDN distribution, custom domain routing for the compiled React SPA. |
+| **Backend Compute** | **Render** | Managed container runtime running the Spring Boot 3.4 (Java 21) REST API with automated health monitoring. |
+| **Application Database** | **Google Cloud Firestore** | Serverless, highly available NoSQL document database storing properties, user records, and verification audit trails. |
+| **Identity & Auth** | **Firebase Authentication** | Secure token generation, user identity management, and role synchronization across frontend and backend. |
+| **Media & Document Storage** | **Cloudinary** | Cloud object storage and optimized CDN delivery for property images, documents, deeds, and 360° virtual tours. |
+| **Containerization** | **Docker** | Multi-stage Docker container build ensuring reproducible execution across local and cloud environments. |
+| **GIS & Mapping Engine** | **Mapbox GL JS / OpenStreetMap** | Real-time geospatial rendering, polygon survey boundary inspection, and spatial clustering. |
+| **Virtual Tour Engine** | **Pannellum VR** | Equirectangular 360° panoramic viewer enabling remote property inspection. |
+| **CI/CD Automation** | **GitHub Actions** | Automated build verification, test suite execution, and continuous deployment workflows. |
+| **Code Quality** | **SonarQube & Python Runner** | Static code analysis, vulnerability scanning, and code smell remediation (`automate_sonar.py`). |
 
 ---
 
-## 7. Live Deployment & Production Endpoints
+## 8. Live Deployment & Production Endpoints
 
-Production servers are live in the AWS Mumbai (`ap-south-1`) region:
+The LandLens platform is deployed and fully operational on cloud infrastructure:
 
-*   🌐 **Live Web Portal**: `https://dpyyh7torlown.cloudfront.net`
-*   ⚙️ **Backend Load Balancer Base URL**: `http://landlens-production-alb-1919392235.ap-south-1.elb.amazonaws.com`
-*   💓 **Health Check (Actuator)**: `http://landlens-production-alb-1919392235.ap-south-1.elb.amazonaws.com/actuator/health`
-*   📖 **Swagger Documentation**: `http://landlens-production-alb-1919392235.ap-south-1.elb.amazonaws.com/swagger-ui/index.html` *(Dev profile)*
-*   🗄️ **Production Database (Hostinger)**: `srv1117.hstgr.io:3306` (Schema: `u833088220_Priya_teamlead`)
-*   🌐 **NAT Gateway Public Egress IP**: `13.207.227.126` (Whitelisted in Hostinger Remote MySQL settings)
+*   🌐 **Live Web Portal**: [https://landlens-c0007.web.app](https://landlens-c0007.web.app)
+*   ⚙️ **Backend API**: [https://landlens-0n4k.onrender.com](https://landlens-0n4k.onrender.com)
+*   💓 **Backend Health Check**: [https://landlens-0n4k.onrender.com/actuator/health](https://landlens-0n4k.onrender.com/actuator/health)
+*   💓 **Backend Liveness**: [https://landlens-0n4k.onrender.com/actuator/health/liveness](https://landlens-0n4k.onrender.com/actuator/health/liveness)
+*   💓 **Backend Readiness**: [https://landlens-0n4k.onrender.com/actuator/health/readiness](https://landlens-0n4k.onrender.com/actuator/health/readiness)
+*   🔥 **Firebase Services**: Firebase Authentication + Cloud Firestore Database
+*   ☁️ **Media Storage**: Cloudinary Media Platform (Cloud Name: `jrgwnblg`, Preset: `landlens_upload`)
 
 ---
 
-## 8. Folder & Package Architecture
+## 9. Folder & Package Architecture
 
 ### Root Directory Overview
 ```text
-LandLense/
+LandLens/
  ├── README.md                      # Master Unified Documentation
  ├── automate_sonar.py              # Automated SonarQube Code Quality Analysis Script
- ├── update_cf.py                   # CloudFront CDN Infrastructure Configuration Script
+ ├── firebase.json                  # Firebase Hosting & Project Deployment Configuration
+ ├── .firebaserc                    # Firebase Active Project Aliases
  ├── frontend-react/                # Production React 18 + Vite Frontend Application
  │    ├── src/                      # Components, Dashboards, Mapbox & Services
  │    ├── public/                   # Static Media Assets (logo.png, icons)
- │    ├── .github/workflows/        # Automated Deployment CI/CD Workflow
+ │    ├── .env.example              # Frontend Environment Template
  │    ├── package.json              # React Dependencies & Scripts
  │    └── vite.config.ts            # Vite Compiler Configuration
  └── back_end/                      # Spring Boot 3.4 (Java 21) REST Backend Application
       ├── src/main/java/com/landlens/ # Feature Packages (Auth, Property, AI, Fraud, etc.)
-      ├── src/main/resources/       # schema.sql, application.properties
-      ├── terraform/                # Infrastructure-as-Code for AWS ECS/ALB/VPC
-      ├── deploy.ps1                # Automated Windows Deployment Pipeline
-      ├── deploy.sh                 # Automated Linux Deployment Pipeline
+      ├── src/main/resources/       # application.properties
+      ├── render.yaml               # Render Cloud Blueprint & Deployment Definition
       ├── Dockerfile                # Multi-stage Docker Container Definition
       └── pom.xml                   # Maven Dependencies & Build Definitions
 ```
@@ -234,46 +234,47 @@ LandLense/
 ```text
 com.landlens
  ├── LandlensApplication.java  # Application Entry Point
- ├── auth                      # Authorization, Security Config, and Users
- ├── user                      # User Profile Management
- ├── property                  # Listings, Images, Videos, Saved, & Bookings
- ├── document                  # Verification registry document uploads
- ├── verification              # Government Review and Timeline transitions
- ├── ai                        # AI scoring outputs, valuation and chatbot
- ├── fraud                     # Duplicate claim coordinates & community reports
- ├── notification              # Real-time alerts and user logs
- ├── api                       # Developer API key, rate-limiting, and logs
- └── analytics                 # Daily dashboard statistics pre-aggregation
+ ├── config                    # Firebase & Cloud Service Configuration (FirebaseConfig)
+ ├── common                    # AbstractFirestoreRepository, JacksonConfig, RootController
+ ├── auth                      # Security Config, JwtAuthenticationFilter, AuthService
+ ├── user                      # User Profile Management & FirestoreUserRepository
+ ├── property                  # Listings, Images, Videos, Saved, & FirestorePropertyRepository
+ ├── document                  # Verification registry document uploads & Firestore Repository
+ ├── verification              # Government Review, Timeline transitions, & Repositories
+ ├── ai                        # AI scoring outputs, valuation, and Firestore Repository
+ ├── fraud                     # Duplicate claim coordinates & FraudReportRepository
+ ├── notification              # Real-time alerts, Firestore Notification Repository
+ ├── api                       # Developer API keys, rate-limiting, and Firestore Repositories
+ └── analytics                 # Daily dashboard statistics & Firestore Repository
 ```
 
 ---
 
-## 9. System Architecture & Sequence Diagrams
+## 10. System Architecture & Sequence Diagrams
 
-### A. AWS Network Topology
+### A. Production Cloud Topology
 ```mermaid
 graph TD
-    Client[Client / Frontend Web & Mobile] -->|1. HTTPS Request| CF[Amazon CloudFront CDN]
-    CF -->|2. Fetch Static UI| S3[Amazon S3 Bucket]
-    CF -->|3. Route /api/*| ALB[Application Load Balancer]
+    User([Client / Web & Mobile Browsers]) -->|1. HTTPS Request| FH[Firebase Hosting Global CDN]
+    FH -->|2. Deliver Static React SPA| User
+    User -->|3. HTTPS API Request| Render[Render Cloud Runtime]
     
-    subgraph VPC [AWS VPC - Mumbai Region ap-south-1]
-        ALB -->|4. Forward Port 8080| ECS[ECS Fargate Tasks]
-        
-        subgraph PrivateSubnets [Private Subnets]
-            ECS
-        end
-        
-        subgraph PublicSubnets [Public Subnets]
-            ALB
-            NAT[NAT Gateway]
-        end
-        
-        ECS -->|5. Outbound Traffic| NAT
+    subgraph RenderApp [Render Backend Container]
+        Render -->|4. Port 8080| SB[Spring Boot 3.4 REST Service]
+        SB -->|5. Validate Auth Token| SEC[Spring Security & JWT Filter]
     end
 
-    NAT -->|6. Egress IP: 13.207.227.126| DB[(Hostinger Remote MySQL DB)]
-    ECS -->|7. Asynchronous OCR & Trust Evaluation| AI[AI Verification Engine]
+    subgraph FirebaseCloud [Firebase & Google Cloud Platform]
+        SEC -->|6. Verify Identity| FBAuth[Firebase Authentication]
+        SB -->|7. Query & Persist Data| FS[(Cloud Firestore NoSQL DB)]
+    end
+
+    subgraph MediaCloud [Cloudinary CDN]
+        User -->|8. Direct Media Upload| CD[Cloudinary Media Storage]
+        SB -->|9. Image/Document Metadata| CD
+    end
+
+    SB -->|10. Asynchronous OCR & Trust Evaluation| AI[AI Verification Engine]
 ```
 
 ### B. Application Request Processing Lifecycle
@@ -284,26 +285,26 @@ sequenceDiagram
     participant Security as Spring Security Filter Chain
     participant Controller as REST Controller
     participant Service as Service Layer
-    participant Repos as JPA Repository
-    participant DB as Hostinger MySQL DB
+    participant Repos as Firestore Repository
+    participant DB as Cloud Firestore (NoSQL)
     participant AI as AI Engine & OCR
 
     Client->>Security: Send HTTP Request (e.g., POST /api/properties)
     alt Anonymous path permitted (e.g., /actuator/health)
         Security->>Controller: Forward to Controller
     else Protected path
-        Note over Security: Validate JWT token from Authorization header
-        alt JWT Valid
-            Security->>Controller: Forward with Auth Principal
-        else JWT Invalid / Missing
+        Note over Security: Validate JWT token or Firebase ID Token
+        alt Token Valid
+            Security->>Controller: Forward with Auth Principal & Role
+        else Token Invalid / Missing
             Security-->>Client: Return 401 Unauthorized / 403 Forbidden
         end
     end
 
     Controller->>Service: Call Business Logic (e.g., createProperty)
-    Service->>Repos: Invoke Database Operation
-    Repos->>DB: Query / Insert / Update (SQL)
-    DB-->>Repos: Return Result Sets
+    Service->>Repos: Invoke Repository Operation
+    Repos->>DB: Query / Insert / Update (Firestore Documents)
+    DB-->>Repos: Return Document Snapshots
     Repos-->>Service: Return Entity Model
 
     opt Needs AI Verification (Documents Uploaded)
@@ -349,34 +350,34 @@ stateDiagram-v2
 sequenceDiagram
     participant User as Buyer / Provider
     participant React as React Frontend
-    participant Gateway as AWS CloudFront / ALB
+    participant Render as Render Cloud API
     participant AI as Spring Boot AI Engine
-    participant DB as Hostinger MySQL DB
+    participant DB as Cloud Firestore
 
     User->>React: Input Survey No, Area & Coordinates
-    React->>Gateway: POST /api/ai/estimate-price
-    Gateway->>AI: Forward Request Payload
+    React->>Render: POST /api/ai/estimate-price
+    Render->>AI: Forward Request Payload
     AI->>DB: Fetch Local Historical Sales & Base Rates
     DB-->>AI: Return Benchmark Data
     AI->>AI: Execute ML Valuation Model
-    AI-->>Gateway: Return Price Range, SqFt Rate & Confidence Score
-    Gateway-->>React: JSON Response Payload
+    AI-->>Render: Return Price Range, SqFt Rate & Confidence Score
+    Render-->>React: JSON Response Payload
     React-->>User: Render Interactive Valuation Breakdown
 ```
 
 ---
 
-## 10. Database Module Overview & Table Directory
+## 11. Database Module Overview & Entity Directory
 
-The database is normalized into **3NF (Third Normal Form)** tables. Every table includes audit attributes:
-*   `id` (`VARCHAR(36)` UUID, Primary Key)
-*   `created_at` (`TIMESTAMP`, Default `CURRENT_TIMESTAMP`)
-*   `updated_at` (`TIMESTAMP`, Default `CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`)
-*   `created_by` (`VARCHAR(36)` UUID, Nullable)
-*   `updated_by` (`VARCHAR(36)` UUID, Nullable)
-*   `is_active` (`BOOLEAN`, Default `true` for soft-deletion)
+The application data model is structured across dedicated Firestore collections utilizing the `AbstractFirestoreRepository` base layer. Every document includes standardized audit attributes:
+*   `id` (`VARCHAR(36)` UUID, Primary Key / Document ID)
+*   `created_at` (`TIMESTAMP`, Default creation timestamp)
+*   `updated_at` (`TIMESTAMP`, Last updated timestamp)
+*   `created_by` (`VARCHAR(36)` UUID, Creator reference)
+*   `updated_by` (`VARCHAR(36)` UUID, Updater reference)
+*   `is_active` (`BOOLEAN`, Soft-deletion status flag)
 
-| Module | Table Name | Description |
+| Module | Collection / Entity | Description |
 | :--- | :--- | :--- |
 | **Auth & User** | `roles` | Roles mapping to RBAC privileges (`ADMIN`, `GOVERNMENT_OFFICER`, `PROVIDER`, `BUYER`). |
 | | `users` | User profile, role reference, credentials hash. |
@@ -401,8 +402,6 @@ The database is normalized into **3NF (Third Normal Form)** tables. Every table 
 | | `api_logs` | Trace log of developer API requests. |
 | | `api_rate_limits` | Current rate limiting windows for active keys. |
 | **Analytics** | `daily_analytics` | Pre-aggregated system metrics per day. |
-
-> 📅 **Schema Version**: 3NF Relational Database Schema — `July 2026`
 
 ---
 
@@ -612,7 +611,7 @@ erDiagram
 
 ---
 
-## 13. Complete REST API Directory
+## 12. Complete REST API Directory
 
 ### 🔐 1. Authentication (`/api/auth`)
 *   `POST /api/auth/register` — Register new user account (`BUYER`, `PROVIDER`, `GOVERNMENT_OFFICER`, `ADMIN`)
@@ -656,7 +655,7 @@ erDiagram
 
 ---
 
-## 14. Local Development & Setup Guide
+## 13. Local Development & Setup Guide
 
 ### A. Frontend Setup (`/frontend-react`)
 ```bash
@@ -673,68 +672,81 @@ cd back_end
 ```
 The server will start listening at `http://localhost:8080`.
 
-### C. Docker Compose (Full Stack Local Orchestration)
+### C. Docker Deployment (Local & Production Container)
 ```bash
-docker-compose up --build -d
+cd back_end
+docker build -t landlens-backend .
+docker run -p 8080:8080 landlens-backend
 ```
-Boots MySQL 8.0 and the Spring Boot service cleanly in an isolated Docker container network.
+Boots the Spring Boot application cleanly inside an isolated multi-stage Docker container.
 
 ---
 
-## 15. Environment Variables Reference
+## 14. Environment Variables Reference
 
+### Backend Configuration (`/back_end`)
 | Variable Name | Description | Default Fallback (Development) |
 |---|---|---|
-| `DB_URL` | JDBC Connection URL for MySQL | `jdbc:mysql://localhost:3306/landlens?useSSL=false...` |
-| `DB_USERNAME` | Database Authentication User | `root` |
-| `DB_PASSWORD` | Database Authentication Password | `[blank]` |
-| `JWT_SECRET` | HMAC SHA-256 Signature Secret | `9a2f3f4e5d6c7b8a9f0e1d2c3b4a5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3` |
+| `PORT` | Embedded server listening port | `8080` |
+| `FIREBASE_API_KEY` | Firebase Web API Key | Configured in environment |
+| `FIREBASE_PROJECT_ID` | Google Cloud / Firebase Project ID | Configured in environment (`landlens-c0007`) |
+| `FIREBASE_CREDENTIALS_JSON` | Firebase Admin SDK service account credentials JSON string | Set via cloud environment secret |
+| `JWT_SECRET` | HMAC SHA-256 Signature Secret for local JWT validation | Development default secret |
 | `JWT_EXPIRATION_MS` | JWT Access Token duration (ms) | `86400000` (24 Hours) |
 | `JWT_REFRESH_EXPIRATION_MS` | Refresh Token expiry duration (ms) | `2592000000` (30 Days) |
-| `SPRING_PROFILES_ACTIVE` | Active profile (`prod` or `dev`) | `default` |
-| `PORT` | Embedded server port | `8080` |
+| `OPENAI_API_KEY` | NVIDIA / AI integration API key | Development fallback |
+
+### Frontend Configuration (`/frontend-react`)
+| Variable Name | Description | Example / Production Value |
+|---|---|---|
+| `VITE_API_BASE_URL` | Base URL for backend REST API | `https://landlens-0n4k.onrender.com` |
+| `VITE_CLOUDINARY_CLOUD_NAME` | Cloudinary public Cloud Name | `jrgwnblg` |
+| `VITE_CLOUDINARY_UPLOAD_PRESET` | Cloudinary unsigned upload preset | `landlens_upload` |
+| `VITE_MAPBOX_ACCESS_TOKEN` | Mapbox GL JS Access Token | Configured in environment |
+| `VITE_MAPBOX_STYLE` | Mapbox tile layer style URL | `mapbox://styles/mapbox/satellite-streets-v12` |
 
 ---
 
-## 16. Security, Auth & Rate Limiting
+## 15. Security, Auth & Rate Limiting
 
-*   **Credential Encryption**: Hashing using BCrypt for password fields inside `users`.
-*   **Token Authorization**: Custom `JwtAuthenticationFilter` intercepts HTTP headers to validate bearer signatures.
+*   **Credential Encryption**: Secure password hashing using BCrypt for password fields.
+*   **Dual Token Authorization**: Custom `JwtAuthenticationFilter` intercepts HTTP headers to validate both standard JWT bearer signatures and Google/Firebase ID tokens, automatically extracting user roles (`ROLE_PROVIDER`, `ROLE_BUYER`, `ROLE_GOVERNMENT_OFFICER`, `ROLE_ADMIN`).
 *   **External API Guarding**: Interceptor (`ApiKeyInterceptor`) locks all `/api/v1/external/**` routes requiring `x-api-key`.
 *   **Rate Limits**: Automated tracker logs developer usage and blocks keys exceeding defined thresholds (`429 Rate Limit Exceeded`).
 
 ---
 
-## 17. Application Scalability & Performance
+## 16. Application Scalability & Performance
 
-*   📈 **Horizontal Container Scaling**: AWS ECS Fargate tasks dynamically scale horizontally (up to 30 tasks) based on CPU/RAM utilization.
-*   ⚡ **Global Edge CDN Caching**: CloudFront caches React bundle assets across 300+ global edge locations, ensuring sub-100ms page load times worldwide.
-*   🗄️ **Database Read Replicas**: MySQL Aurora Serverless v2 setup allows routing high-volume read queries (`GET /api/properties`) to read replicas, preserving master node write capacity.
-*   🚀 **Sub-Second API Response Times**: HikariCP connection pooling and MapStruct DTO mappers minimize latency.
+*   📈 **Managed Container Compute**: Render cloud environment continuously manages container health, automated restarts, and zero-downtime rolling deployments.
+*   ⚡ **Global Edge CDN Caching**: Firebase Hosting delivers compiled React single-page assets across Google's global SSD-backed CDN edges with sub-100ms load times worldwide.
+*   🗄️ **Serverless Document Scalability**: Google Cloud Firestore provides automatic horizontal scaling, auto-sharding, and zero connection pool bottlenecks under high concurrency.
+*   ☁️ **High-Performance Media Delivery**: Cloudinary CDN automatically optimizes, compresses, and delivers property images, virtual tour panoramas, and legal documents on-the-fly.
+*   🚀 **Sub-Second API Response Times**: Optimized Spring Boot REST endpoints with non-blocking Firestore operations minimize latency.
 
 ---
 
-## 18. AWS Infrastructure Cost Projections
+## 17. Cloud Infrastructure Cost Projections
 
-| User Scale | Frontend (S3 + CloudFront) | Backend API (ECS Fargate + ALB) | Database (MySQL / RDS) | Networking & Egress (NAT Gateway) | Total Estimated Monthly Cost |
+| User Scale | Frontend (Firebase Hosting) | Backend API (Render) | Database & Auth (Firestore & Firebase) | Media Storage (Cloudinary) | Total Estimated Monthly Cost |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **100 Users** | **$0 - $2** *(CloudFront Free Tier)* | **$26 - $30** | **$10 - $15** *(Hostinger / Small)* | **$32 - $35** | **~$68 - $85 / mo** (~₹5.5k - ₹7k) |
-| **1,000 Users** | **$2 - $5** | **$45 - $55** | **$25 - $40** *(RDS db.t4g.small)* | **$35 - $40** | **~$110 - $140 / mo** (~₹9k - ₹11.5k) |
-| **10,000 Users** | **$100 - $150** | **$165 - $230** | **$150 - $250** *(RDS Multi-AZ)* | **$60 - $90** | **~$600 - $800 / mo** (~₹50k - ₹66k) |
-| **100,000 (1 Lakh)**| **$1,200 - $1,800** | **$950 - $1,450** | **$800 - $1,500** *(Aurora Serverless)* | **$200 - $350** | **~$3,500 - $5,000 / mo** (~₹2.9L - ₹4.1L) |
+| **100 Users** | **$0** *(Spark Free Tier)* | **$0 - $7** *(Render Starter)* | **$0** *(Free Quota)* | **$0** *(Free Tier)* | **$0 - $7 / mo** (~₹0 - ₹600) |
+| **1,000 Users** | **$0 - $2** | **$7 - $15** *(Render Individual)* | **$2 - $5** | **$0 - $5** | **~$10 - $25 / mo** (~₹800 - ₹2,000) |
+| **10,000 Users** | **$5 - $10** | **$25 - $50** *(Render Pro)* | **$15 - $30** | **$15 - $30** | **~$60 - $120 / mo** (~₹5k - ₹10k) |
+| **100,000 (1 Lakh)**| **$25 - $50** | **$85 - $150** *(Render Scale)* | **$80 - $160** *(Blaze Pay-as-you-go)* | **$50 - $100** | **~$240 - $460 / mo** (~₹20k - ₹38k) |
 
 ---
 
-## 19. Future Roadmap & Improvements
+## 18. Future Roadmap & Improvements
 
-*   **Test Isolation with H2**: Mock H2 in-memory profile (`application-test.properties`) so build steps execute offline cleanly.
-*   **Redis Caching Layer**: Cache wrapper for public property search endpoints to reduce DB hits.
+*   **Test Isolation with H2 / Testcontainers**: Automated mock test profile (`application-test.properties`) so build steps execute offline cleanly.
+*   **Redis Caching Layer**: Cache wrapper for public property search endpoints to reduce Firestore read hits.
 *   **Asynchronous Message Queue**: Transition AI processing and OCR triggers from inline threads to RabbitMQ/Kafka.
-*   **Geospatial Indexes**: Spatial datatypes using `Hibernate Spatial` + `MySQL Spatial` to support polygon land searches.
+*   **Geospatial Clustering**: Enhanced GeoFirestore geospatial indexing for ultra-dense polygon boundary searches and heatmaps.
 
 ---
 
-## 20. Contributing & License
+## 19. Contributing & License
 
 1.  Create a feature branch from `main` (`git checkout -b feature/amazing-feature`).
 2.  Commit your changes using meaningful, structured commit messages.
